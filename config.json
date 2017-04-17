@@ -1,19 +1,34 @@
 {
-    "log":["CRUD+", "REST+", "Changes+", "Attach+"],
-    "databases": {
-        "couchbaselitedemo": {
-            "server":"http://rois-macbook-pro.local:8091",
-            "bucket" : "default",
-            "sync":`
-              function (doc, oldDoc) {
-                channel ("delphi");
-            }`,
-            "users": {
-                "GUEST": {
-                    "disabled": false,
-                    "admin_channels": ["*"]
-                }
-            }
-        }
+  "log": [ "CRUD+", "REST+", "Changes+", "Attach+" ],
+  "logging": {
+    "default": {
+    	"logLevel": "debug",
+    	"logFilePath": "U:/CMMS/lib/CouchbaseLite-Delphi-ComInterop-master/sync.log",
+    	"logKeys": ["*"]
     }
+  },
+  "SSLCert": "C:/Program Files (x86)/Couchbase/cert/cert.pem",
+  "SSLKey": "C:/Program Files (x86)/Couchbase/cert/privkey.pem",
+  "databases": {
+    "beer": {
+      "server": "http://localhost:8091",
+      "bucket": "beer-sample",
+      "sync": `
+      function (doc,
+      oldDoc) {
+        channel ("delphi");
+      }
+      `,
+      "users": {
+        "GUEST": {
+          "disabled": false,
+          "admin_channels": [ "*" ]
+        },
+        "david": {
+          "admin_channels": [ "*", "delphi" ],
+          "password": "12345"
+        }
+      }
+    }
+  }
 }

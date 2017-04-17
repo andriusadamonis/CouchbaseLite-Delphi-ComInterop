@@ -11,6 +11,8 @@
         <Button Content="Update" Click="UpdateDocumentClick"></Button>
         <Button Content="Read" Click="GetDocumentClick"></Button>
         <Button Content="Delete" Click="DeleteDocumentClick"></Button>
-        <TextBox Name="id"/>
+        <Button Content="Stop Sync" Click="StopSyncClick"></Button>
+        <Button Content="Start Sync" Click="StartSyncClick"></Button>
+        <TextBox Name="id" Text="beer_aa1"/>
     </StackPanel>
 </Window>

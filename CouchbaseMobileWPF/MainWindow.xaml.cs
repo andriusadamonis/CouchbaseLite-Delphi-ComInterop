@@ -13,8 +13,8 @@ namespace CouchbaseMobileWPF
 
         CouchbaseLiteFacade _manager;
         string documentId;
-        const string TAG = "CouchbaseEvents";
-        const string DB_NAME = "couchbaseevents";
+        const string TAG = "BeerDemo";
+        const string DB_NAME = "beer";
 
         private Database _db;
 
@@ -22,6 +22,7 @@ namespace CouchbaseMobileWPF
         {
             InitializeComponent();
             _manager = new CouchbaseLiteFacade();
+            Title = _manager.GetLocalDbName();
             _manager.StartSyncGateway();
         }
 
@@ -29,12 +30,12 @@ namespace CouchbaseMobileWPF
         {
             var properties =
             "{" +
-                "\"name\": \"Roi Katz\", " +
-                "\"age\": 31," +
-                "\"database\" : \"Couchbase\"" +
+                "\"Beer\": \"Švyturio Gintarinis\", " +
+                "\"Age\": 12," +
+                "\"Good\" : false" +
             "}";
 
-            var docInsertedId = _manager.Insert(properties);
+            var docInsertedId = _manager.Insert(id.Text, properties);
             MessageBox.Show("Doc-id: " + docInsertedId, "Insert");
 
             documentId = docInsertedId;
@@ -47,9 +48,9 @@ namespace CouchbaseMobileWPF
 
             var newProperties =
                         "{" +
-                            "\"name\": \"Roi Katz!\", " +
-                            "\"age\": 32," +
-                            "\"database\" : \"CB\"" +
+                            "\"Beer\": \"Švyturio Stiprusis\", " +
+                            "\"Age\": " + DateTime.Now.Second + "," +
+                            "\"Good\" : true" +
                         "}";
 
             var updated = _manager.Update(id.Text, newProperties);
@@ -59,7 +60,7 @@ namespace CouchbaseMobileWPF
 
         private void GetDocumentClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(id.Text )) return;
+            if (string.IsNullOrEmpty(id.Text)) return;
            
             var docGet = _manager.Get(id.Text);
             
@@ -76,6 +77,16 @@ namespace CouchbaseMobileWPF
             MessageBox.Show(msg);
            
             documentId = null;
+        }
+
+        private void StartSyncClick(object sender, RoutedEventArgs e)
+        {
+            _manager.StartSyncGateway();
+        }
+
+        private void StopSyncClick(object sender, RoutedEventArgs e)
+        {
+            _manager.StopSyncGateway();
         }
     }
 }

@@ -8,11 +8,13 @@ namespace CouchbaseLiteManager
     [Guid("02113b7a-4864-4520-94cd-1542a2b0ff05")]
     public interface ICouchbaseLiteFacade
     {
+        string GetLocalDbName();
+
         void StartSyncGateway(string url = "");
 
         void StopSyncGateway();
 
-        string Insert(string propertiesJson);
+        string Insert(string docId, string propertiesJson);
 
         string Get(string docId);
 
