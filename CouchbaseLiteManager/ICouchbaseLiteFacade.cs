@@ -10,7 +10,7 @@ namespace CouchbaseLiteManager
     {
         string GetLocalDbName();
 
-        void StartSyncGateway(string url = "");
+        void StartSyncGateway(string scheme = "https", string hostname = "localhost", int port = 4984, string dbname = "beer", string username = "david", string password = "123456");
 
         void StopSyncGateway();
 

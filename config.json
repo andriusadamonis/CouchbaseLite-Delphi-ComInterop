@@ -27,6 +27,10 @@
         "david": {
           "admin_channels": [ "*", "delphi" ],
           "password": "12345"
+        },
+        "jonas": {
+          "admin_channels": [ "*", "delphi" ],
+          "password": "12345"
         }
       }
     }

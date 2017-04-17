@@ -15,6 +15,7 @@ namespace CouchbaseMobileWPF
         string documentId;
         const string TAG = "BeerDemo";
         const string DB_NAME = "beer";
+        const string SYNCHOST = "localhost";
 
         private Database _db;
 
@@ -23,7 +24,7 @@ namespace CouchbaseMobileWPF
             InitializeComponent();
             _manager = new CouchbaseLiteFacade();
             Title = _manager.GetLocalDbName();
-            _manager.StartSyncGateway();
+            _manager.StartSyncGateway(hostname: SYNCHOST);
         }
 
         private void InsertDocumentClick(object sender, RoutedEventArgs e)
@@ -81,7 +82,7 @@ namespace CouchbaseMobileWPF
 
         private void StartSyncClick(object sender, RoutedEventArgs e)
         {
-            _manager.StartSyncGateway();
+            _manager.StartSyncGateway(hostname: SYNCHOST, username: ComboName.Text);
         }
 
         private void StopSyncClick(object sender, RoutedEventArgs e)

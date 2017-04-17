@@ -11,6 +11,10 @@
         <Button Content="Update" Click="UpdateDocumentClick"></Button>
         <Button Content="Read" Click="GetDocumentClick"></Button>
         <Button Content="Delete" Click="DeleteDocumentClick"></Button>
+        <ComboBox Text="david" Name="ComboName">
+            <ComboBoxItem Name="cbi_david">david</ComboBoxItem>
+            <ComboBoxItem Name="cbi_jonas">jonas</ComboBoxItem>
+        </ComboBox>
         <Button Content="Stop Sync" Click="StopSyncClick"></Button>
         <Button Content="Start Sync" Click="StartSyncClick"></Button>
         <TextBox Name="id" Text="beer_aa1"/>

@@ -93,12 +93,13 @@ namespace CouchbaseLiteManager
             return document.Deleted;
         }
 
-        public void StartSyncGateway(string url = "")
+        public void StartSyncGateway(string scheme = "https", string hostname = "localhost", int port = 4984, string dbname = "beer", string username = "david", string password = "12345")
         {
-            pull = _database.CreatePullReplication(CreateSyncUri());
-            push = _database.CreatePushReplication(CreateSyncUri());
+            Uri uri = CreateSyncUri(scheme, hostname, port, dbname);
+            pull = _database.CreatePullReplication(uri);
+            push = _database.CreatePushReplication(uri);
 
-            var authenticator = AuthenticatorFactory.CreateBasicAuthenticator("david", "12345");
+            var authenticator = AuthenticatorFactory.CreateBasicAuthenticator(username, password);
             pull.Authenticator = authenticator;
             push.Authenticator = authenticator;
 
@@ -128,16 +129,12 @@ namespace CouchbaseLiteManager
             push.Stop();
         }
 
-        private Uri CreateSyncUri()
+        private Uri CreateSyncUri(string scheme, string hostname, int port, string dbname)
         {
             Uri syncUri = null;
-            string scheme = "https";
-            string host = "localhost";
-            int port = 4984;
-            string dbName = "beer";
             try
             {
-                var uriBuilder = new UriBuilder(scheme, host, port, dbName);
+                var uriBuilder = new UriBuilder(scheme, hostname, port, dbname);
                 syncUri = uriBuilder.Uri;
             }
             catch (UriFormatException e)
